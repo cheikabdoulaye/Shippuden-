@@ -5,7 +5,7 @@ const axios = require("axios");
 module.exports = {
   config: {
     name: "hack",
-    author: "Shibai Otsutsuki",
+    author: "aziz",
     countDown: 5,
     role: 0,
     category: "fun",
@@ -82,7 +82,7 @@ module.exports = {
     fs.removeSync(pathAvt1);
     return api.sendMessage(
       {
-        body: "📵 Maître Shibai Otsutsuki le 𝐏𝐢𝐫𝐚𝐭𝐚𝐠𝐞 𝐝𝐞 𝐥'𝐮𝐭𝐢𝐥𝐢𝐬𝐚𝐭𝐞𝐮𝐫 es reussi !!!📵",
+        body: "📵 DALMOUDO le compte est piraté avec succès !!!📵",
         attachment: fs.createReadStream(pathImg),
       },
       event.threadID,
