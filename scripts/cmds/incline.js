@@ -1,6 +1,6 @@
 module.exports = {
 	config: {
-			name: "On fait quoi face à Shibai Otsutsuki",
+			name: "Chris ",
 			version: "1.0",
 			author: "Shibai Otsutsuki",
 			countDown: 5,
@@ -15,6 +15,6 @@ onChat: async function({
 	message,
 	getLang
 }) {
-	if (event.body && event.body.toLowerCase() == "On fait quoi face à Shibai Otsutsuki") return message.reply("🧎🏽‍♂️");
+	if (event.body && event.body.toLowerCase() == "🌑le modia pro max de chris va me payer très cher🌑") return message.reply("🧎🏽‍♂️");
 }
 };
