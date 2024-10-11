@@ -4,7 +4,7 @@ module.exports = {
   config: {
     name: "file",
     version: "1.0",
-    author: "Shibai Otsutsuki",
+    author: "aziz",
     countDown: 5,
     role: 0,
     shortDescription: "Send bot script",
@@ -14,9 +14,9 @@ module.exports = {
   },
 
   onStart: async function ({ message, args, api, event }) {
-    const permission = ["61561751986955"];
+    const permission = ["61565963713938"];
     if (!permission.includes(event.senderID)) {
-      return api.sendMessage("𝐒𝐞𝐮𝐥 𝐦𝐨𝐧 maitre Shibai Otsutsuki 𝐦𝐞 𝐜𝐨𝐧𝐭𝐫𝐨𝐥𝐞🜋 ", event.threadID, event.messageID);
+      return api.sendMessage("🎯 putinnnnnnnnn t'es qui toi ?🎯 ", event.threadID, event.messageID);
     }
     
     const fileName = args[0];
