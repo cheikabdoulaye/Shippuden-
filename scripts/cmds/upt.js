@@ -1,9 +1,9 @@
-#cmd install upt.js module.exports = {
+module.exports = {
   config: {
     name: "upt",
     aliases: ["up"],
     version: "1.0",
-    author: "Ronald",
+    author: "Shibai Otsutsuki",
     role: 2,
     shortDescription: {
       en: "Displays the total number of users of the bot and check uptime "
@@ -30,9 +30,9 @@ Math.floor(uptime / (3600 * 24));
       
       const uptimeString = `${days} : ${hours} : ${minutes} : ${seconds}`;
       
-      api.sendMessage(`[⌛] Shibai Sensei le temps que j'ai duré est:\n\n✪➩ ${uptimeString}\n
-[👨🏽‍🦱] Shibai Sensei le nombre d'utilisateurs que j'ai répondu sont:\n\n✪➩ ${allUsers.length}\n
-[💬] Shibai Sensei le nombre du groupe que j'ai répondu sont:\n\n✪➩ ${allThreads.length}`, event.threadID);
+      api.sendMessage(`[⌛] ça fait au moins :\n\n✪➩ ${uptimeString} que je veille sur ces moutons\n
+Les créatures inférieures que je sauve jour et nuit 🌃 dans ce groupe sont au nombre de :\n\n✪➩ ${allUsers.length}\n
+🍀Le nombre de  groupes de moutons 🐑 que je garde 🍀:\n\n✪➩ ${allThreads.length} groupes`, event.threadID);
     } catch (error) {
       console.error(error);
       api.sendMessage("An error occurred while retrieving data.", event.threadID);
