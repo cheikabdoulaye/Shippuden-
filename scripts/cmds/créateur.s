@@ -15,6 +15,6 @@ onChat: async function({
 	message,
 	getLang
 }) {
-	if (event.body && event.body.toLowerCase() == "qui es ton créateur") return message.reply("J'ai été créé par mon sublime intelligent maître vénéré Daimyo SHIBAI OTSUTSUKI 😰");
+	if (event.body && event.body.toLowerCase() == "qui es ton créateur") return message.reply("Demande à DALMOUDO ");
 }
 };
