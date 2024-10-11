@@ -1,213 +1,77 @@
 const axios = require('axios');
 
-
-
-let lastResponseMessageID = null;
-
-
-
-async function handleCommand(api, event, args, message) {
-
-    try {
-
-        const question = args.join(" ").trim();
-
-
-
-        if (!question) {
-
-            return message.reply("✊😤✊Incline toi créature inférieure✊😤✊
- je réponds à toutes tes questions grâce à mon
-🌑TSUKONAYKONA 🌑.");
-
-        }
-
-
-
-        const { response, messageID } = await getAIResponse(question, event.senderID, event.messageID);
-
-        lastResponseMessageID = messageID;
-
-
-
-        api.sendMessage(`༺❀DALMUDO❀༻\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━`, event.threadID, messageID);
-
-    } catch (error) {
-
-        console.error("Error in handleCommand:", error.message);
-
-        message.reply("✊🥴✊DÉSOLÉ CRÉATURE INFÉRIEURE. J'AI DES PROBLÈMES DE CONCENTRATION ✊🥴✊.");
-
-    }
-
-}
-
-
-
-async function getAnswerFromAI(question) {
-
-    try {
-
-        const services = [
-
-            { url: 'https://markdevs-last-api.onrender.com/gpt4', params: { prompt: question, uid: 'your-uid-here' } },
-
-            { url: 'http://markdevs-last-api.onrender.com/api/v2/gpt4', params: { query: question } },
-
-            { url: 'https://markdevs-last-api.onrender.com/api/v3/gpt4', params: { ask: question } }
-
-        ];
-
-
-
-        for (const service of services) {
-
-            const data = await fetchFromAI(service.url, service.params);
-
-            if (data) return data;
-
-        }
-
-
-
-        throw new Error("No valid response from any AI service");
-
-    } catch (error) {
-
-        console.error("Error in getAnswerFromAI:", error.message);
-
-        throw new Error("Failed to get AI response");
-
-    }
-
-}
-
-
-
 async function fetchFromAI(url, params) {
-
-    try {
-
-        const { data } = await axios.get(url, { params });
-
-        if (data && (data.gpt4 || data.reply || data.response || data.answer || data.message)) {
-
-            const response = data.gpt4 || data.reply || data.response || data.answer || data.message;
-
-            console.log("AI Response:", response);
-
-            return response;
-
-        } else {
-
-            throw new Error("No valid response from AI");
-
-        }
-
-    } catch (error) {
-
-        console.error("Network Error:", error.message);
-
-        return null;
-
-    }
-
+ try {
+ const response = await axios.get(url, { params });
+ return response.data;
+ } catch (error) {
+ console.error(error);
+ return null;
+ }
 }
 
+async function getAIResponse(input, userName, userId, messageID) {
+ const services = [
+ { url: 'https://ai-chat-gpt-4-lite.onrender.com/api/hercai', params: { question: input } }
+ ];
 
+ let response = `DZIGUEN`;
+ let currentIndex = 0;
 
-async function getAIResponse(input, userId, messageID) {
+ for (let i = 0; i < services.length; i++) {
+ const service = services[currentIndex];
+ const data = await fetchFromAI(service.url, service.params);
+ if (data && (data.gpt4 || data.reply || data.response)) {
+ response = data.gpt4 || data.reply || data.response;
+ break;
+ }
+ currentIndex = (currentIndex + 1) % services.length; // Passer au service suivant
+ }
 
-    const query = input.trim() || "hi";
-
-    try {
-
-        const response = await getAnswerFromAI(query);
-
-        return { response, messageID };
-
-    } catch (error) {
-
-        console.error("Error in getAIResponse:", error.message);
-
-        throw error;
-
-    }
-
+ return { response, messageID };
 }
-
-
 
 module.exports = {
+ config: {
+ name: 'ai',
+ author: 'shizuka',
+ role: 0,
+ aliase: ["ai"],
+ category: 'ai-chat',
+ shortDescription: 'ai to ask anything',
+ },
+ onStart: async function ({ api, event, args }) {
+ const input = args.join(' ').trim();
+ if (!input) {
+ api.sendMessage("🍀aziz damiba🍀", event.threadID, event.messageID);
+ return;
+ }
 
-    config: {
+ api.getUserInfo(event.senderID, async (err, ret) => {
+ if (err) {
+ console.error(err);
+ return;
+ }
+ const userName = ret[event.senderID].name;
+ const { response, messageID } = await getAIResponse(input, userName, event.senderID, event.messageID);
+ api.sendMessage(`GOD-TECH\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━ DALMOUDO `, event.threadID, messageID);
+ });
+ },
+ onChat: async function ({ api, event, message }) {
+ const messageContent = event.body.trim().toLowerCase();
+ if (messageContent.startsWith("ai")) {
+ const input = messageContent.replace(/^ai\s*/, "").trim();
+ api.getUserInfo(event.senderID, async (err, ret) => {
+ if (err) {
+ console.error(err);
+ return;
+ }
+ const userName = ret[event.senderID].name;
+ const { response, messageID } = await getAIResponse(input, userName, event.senderID, message.messageID);
+ message.reply(`DALMUDO\n━━━━━━━━━━━━━━━━\n${userName} , ${response} ━━━━━━━━━━━━━━━━ \n `, messageID);
+api.setMessageReaction("🍀", event.messageID, () => {}, true);
 
-        name: 'ai',
-
-        author: 'coffee',
-
-        role: 0,
-
-        category: 'ai',
-
-        shortDescription: 'AI to answer any question',
-
-    },
-
-    onStart: async function ({ api, event, args }) {
-
-        const input = args.join(' ').trim();
-
-        try {
-
-            const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
-
-            lastResponseMessageID = messageID;
-
-            api.sendMessage(`༺❀DALMUDO❀༻\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━`, event.threadID, messageID);
-
-        } catch (error) {
-
-            console.error("Error in onStart:", error.message);
-
-            api.sendMessage("An error occurred while processing your request.", event.threadID);
-
-        }
-
-    },
-
-    onChat: async function ({ event, message, api }) {
-
-        const messageContent = event.body.trim().toLowerCase();
-
-
-
-        // Check if the message is a reply to the bot's message or starts with "ai"
-
-        if ((event.messageReply && event.messageReply.senderID === api.getCurrentUserID()) || (messageContent.startsWith("ai") && event.senderID !== api.getCurrentUserID())) {
-
-            const input = messageContent.replace(/^ai\s*/, "").trim();
-
-            try {
-
-                const { response, messageID } = await getAIResponse(input, event.senderID, event.messageID);
-
-                lastResponseMessageID = messageID;
-
-                api.sendMessage(`༺❀DZIGUEN❀༻\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━`, event.threadID, messageID);
-
-            } catch (error) {
-
-                console.error("Error in onChat:", error.message);
-
-                api.sendMessage("désolé j'ai eu un problème, s'il vous plaît veuillez reposez vôtre question 🎯 DALMOUDO 🎯.", event.threadID);
-
-            }
-
-        }
-
-    },
-
-    handleCommand // Export the handleCommand function for command-based interactions
-
+ });
+ }
+ }
 };
