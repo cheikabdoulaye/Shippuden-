@@ -15,7 +15,7 @@ async function getAIResponse(input, userName, userId, messageID) {
  { url: 'https://ai-chat-gpt-4-lite.onrender.com/api/hercai', params: { question: input } }
  ];
 
- let response = `DZIGUEN`;
+ let response = `🍀 l'intelligence de la \n 👻brigade fantôme👻 \n est active. Pose ta question 🍀`;
  let currentIndex = 0;
 
  for (let i = 0; i < services.length; i++) {
@@ -43,7 +43,7 @@ module.exports = {
  onStart: async function ({ api, event, args }) {
  const input = args.join(' ').trim();
  if (!input) {
- api.sendMessage("🍀aziz damiba🍀", event.threadID, event.messageID);
+ api.sendMessage("🍀 l'intelligence de la \n 👻brigade fantôme👻 \n est active. Pose ta question", event.threadID, event.messageID);
  return;
  }
 
@@ -54,7 +54,7 @@ module.exports = {
  }
  const userName = ret[event.senderID].name;
  const { response, messageID } = await getAIResponse(input, userName, event.senderID, event.messageID);
- api.sendMessage(`GOD-TECH\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━ DALMOUDO `, event.threadID, messageID);
+ api.sendMessage(`GOD-TECH\n━━━━━━━━━━━━━━━━\n${response}\n━━━━━━━━━━━━━━━━ 🍀lintelligence artificielle de la \n👻brigade fantôme 👻 \n est active. Pose ta question`, event.threadID, messageID);
  });
  },
  onChat: async function ({ api, event, message }) {
