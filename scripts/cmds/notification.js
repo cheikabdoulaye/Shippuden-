@@ -30,11 +30,11 @@ module.exports = {
 			errorSendingNotification: "Có lỗi xảy ra khi gửi đến %1 nhóm:\n%2"
 		},
 		en: {
-			missingMessage: "Please enter the message you want to send to all groups",
-			notification: "Shibai Otsutsuki vous parle",
+			missingMessage: "Dieu ototsuki ✊😤✊ entrez votre message pour que les créatures inférieures puissent le recevoir ",
+			notification: "🌑 créatures inférieures 🌑",
 			sendingNotification: "Start sending the noti from admin bot to %1 chat groups",
-			sentNotification: "✅ Sent notification to %1 groups successfully",
-			errorSendingNotification: "An error occurred while sending to %1 groups:\n%2"
+			sentNotification: "l'envoi a été un succès à  %1 groupes",
+			errorSendingNotification: "un échec à l'envoi de  %1 groups:\n%2"
 		}
 	},
 
