@@ -15,6 +15,6 @@ onChat: async function({
 	message,
 	getLang
 }) {
-	if (event.body && event.body.toLowerCase() == "salut") return message.reply("salut.. Celui qui veut une bastonade peut aller voir 🍀kelem🍀 ");
+	if (event.body && event.body.toLowerCase() == "salut") return message.reply("salut.. je suis l'intelligence artificielle de boulsa. mon lycée a pour proviseur 🥀SAÏDOU YAMEOGO🥀 n/INFOS 🫱🍀kelem🍀 et 💨DAMI 💨");
 }
 };
