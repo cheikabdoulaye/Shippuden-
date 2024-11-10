@@ -26,10 +26,10 @@ module.exports = {
 			session2: "noon",
 			session3: "afternoon",
 			session4: "evening",
-			welcomeMessage: "🎯 créatures inférieures inclunez vous 🎯 le dieu des ototsuki 🎯 est présent. Merci pour l'invitation...",
+			welcomeMessage: " je suis 🎯 l'intelligence artificielle des élèves de boulsa  🎯 . Merci pour l'invitation...",
 			multiple1: "you",
 			multiple2: "you guys",
-			defaultWelcomeMessage: `Creature 🌑 {userName} 🌑 \Bienvenue dans le groupe : {boxName}\n passe des moments fous avec tes amis 🌑`
+			defaultWelcomeMessage: `🍷 🌑 {userName} 🌑🍷 \Bienvenue dans le groupe : {boxName}\n passe des moments fous avec tes amis 🌑. n'oublie pas de faire un tour au provincial s'il te plaît 🙏`
 		}
 	},
 
