@@ -23,7 +23,7 @@ module.exports = {
       return message.reply("Please use 'on' or 'off' as an argument");
     }
     await threadsData.set(event.threadID, args[0] === "on", "settings.antiout");
-    return message.reply(`💬𝗮𝗻𝘁𝗶𝗼𝘂𝘁  ${args[0] === "on" ? " 𝒂𝒄𝒕𝒊𝒗𝒊𝒕𝒆́ 𝒑𝒆𝒓𝒔𝒐𝒏𝒏𝒆𝒔 𝒏𝒆 𝒔'𝒆́𝒄𝒉𝒂𝒑𝒑𝒆 𝒅𝒆 𝒎𝒂 𝒅𝒆𝒎𝒆𝒖𝒓𝒆...🏌️🥀" : "𝒅𝒆́𝒔𝒂𝒄𝒕𝒊𝒗𝒆𝒓 𝒗𝒐𝒖𝒔 𝒂𝒗𝒆𝒛 𝒆𝒖𝒕 𝒅𝒆 𝒍𝒂 𝒄𝒉𝒂𝒏𝒄𝒆 𝒂𝒍𝒍𝒆𝒛-𝒚 𝒔𝒐𝒓𝒕𝒆́...🌬️🥀"}.`);
+    return message.reply(`💬𝗮𝗻𝘁𝗶𝗼𝘂𝘁  ${args[0] === "on" ? " 𝒂𝒄𝒕𝒊𝒗𝒊𝒕𝒆́ 𝒑𝒆𝒓𝒔𝒐𝒏𝒏𝒆𝒔 𝒏𝒆 𝒔'𝒆́𝒄𝒉𝒂𝒑𝒑𝒆 𝒅𝒆 𝒎𝒂 𝒅𝒆𝒎𝒆𝒖𝒓𝒆...🏌️🥀 🫸vous êtes obligés de traiter les mathématiques 🫷" : "𝒅𝒆́𝒔𝒂𝒄𝒕𝒊𝒗𝒆𝒓 𝒗𝒐𝒖𝒔 𝒂𝒗𝒆𝒛 𝒆𝒖𝒕 𝒅𝒆 𝒍𝒂 𝒄𝒉𝒂𝒏𝒄𝒆 𝒂𝒍𝒍𝒆𝒛-𝒚 𝒔𝒐𝒓𝒕𝒆́...🌬️🥀 je te préviens le censeur va te punir"}.`);
   },
   onEvent: async function({ api, event, threadsData }) {
     const antiout = await threadsData.get(event.threadID, "settings.antiout");
