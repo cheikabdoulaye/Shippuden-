@@ -6,7 +6,7 @@ async function handleCommand(api, event, args) {
         const question = args.join(" ").trim();
 
         if (!question) {
-            return api.sendMessage("🍀je suis l'intelligence artificielle de boulsa 🍀 \n posez votre question  ", event.threadID, event.messageID);
+            return api.sendMessage("🔐le provincial avant tout 🔐 ", event.threadID, event.messageID);
         }
 
         const response = await getAIResponse(api, question, event.senderID);
@@ -21,7 +21,7 @@ async function handleCommand(api, event, args) {
 // Function to fetch the answer from AI
 async function getAnswerFromAI(api, question, senderID) {
     const uid = senderID; // User UID to pass in API calls
-    const apiUrl = `https://kaiz-apis.gleeze.com/ helpful ai&prompt=${encodeURIComponent(question)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/customAi?system=your helpful ai&prompt=${encodeURIComponent(question)}`;
 
     const data = await fetchFromAI(apiUrl);
     if (data) return data;
