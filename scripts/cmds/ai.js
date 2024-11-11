@@ -21,7 +21,7 @@ async function handleCommand(api, event, args) {
 // Function to fetch the answer from AI
 async function getAnswerFromAI(api, question, senderID) {
     const uid = senderID; // User UID to pass in API calls
-    const apiUrl = `https://hung-rest.onrender.com/api/customAi?system=your helpful ai&prompt=${encodeURIComponent(question)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/ helpful ai&prompt=${encodeURIComponent(question)}`;
 
     const data = await fetchFromAI(apiUrl);
     if (data) return data;
