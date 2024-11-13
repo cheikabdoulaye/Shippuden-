@@ -1,79 +1,71 @@
 const axios = require('axios');
 
-// Function to handle commands and process the AI response
-async function handleCommand(api, event, args) {
-    try {
-        const question = args.join(" ").trim();
+const fonts = {
 
-        if (!question) {
-            return api.sendMessage("🔐le provincial avant tout 🔐 ", event.threadID, event.messageID);
-        }
-
-        const response = await getAIResponse(api, question, event.senderID);
-
-        api.sendMessage(response, event.threadID, event.messageID);
-    } catch (error) {
-        console.error("Error in handleCommand:", error.message);
-        api.sendMessage("An error occurred while processing your request.", event.threadID, event.messageID);
+    mathsans: {
+        a: "𝗮", b: "𝗯", c: "𝗰", d: "𝗱", e: "𝗲", f: "𝗳", g: "𝗴", h: "𝗵", i: "𝗶",
+    j: "𝗷", k: "𝗸", l: "𝗹", m: "𝗺", n: "𝗻", o: "𝗼", p: "𝗽", q: "𝗾", r: "𝗿",
+    s: "𝘀", t: "𝘁", u: "𝘂", v: "𝘃", w: "𝘄", x: "𝘅", y: "𝘆", z: "𝘇",
+    A: "𝘼", B: "𝘽", C: "𝘾", D: "𝘿", E: "𝙀", F: "𝙁", G: "𝙂", H: "𝙃", I: "𝙄",
+    J: "𝙅", K: "𝙆", L: "𝙇", M: "𝙈", N: "𝙉", O: "𝙊", P: "𝙋", Q: "𝙌", R: "𝙍",
+    S: "𝙎", T: "𝙏", U: "𝙐", V: "𝙑", W: "𝙒", X: "𝙓", Y: "𝙔", Z: "𝙕",1: "𝟭", 2: "𝟮", 3: "𝟯", 4: "𝟰", 5: "𝟱", 6: "𝟲", 7: "𝟳", 8: "𝟴", 9: "𝟵", 0: "𝟬"
     }
-}
+};
+const rolePlay = "quand tu réponds à cette question ajoutes des emojis convenables. :\n\n";
 
-// Function to fetch the answer from AI
-async function getAnswerFromAI(api, question, senderID) {
-    const uid = senderID; // User UID to pass in API calls
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/customAi?system=your helpful ai&prompt=${encodeURIComponent(question)}`;
+const Prefixes = [
+  'ia',
+  'ai',
+  'temari',
+  'ae',
+];
 
-    const data = await fetchFromAI(apiUrl);
-    if (data) return data;
-
-    throw new Error("No valid response from AI service");
-}
-
-// Function to fetch data from the AI service
-async function fetchFromAI(url) {
-    try {
-        const { data } = await axios.get(url);
-        const response = data.response; // Accessing the response directly
-
-        if (typeof response === 'string') {
-            console.log("AI Response:", response);
-            return response;
-        }
-        return null;
-    } catch (error) {
-        console.error("Error in fetchFromAI:", error.message);
-        return null;
-    }
-}
-
-// Main function to get the AI response
-async function getAIResponse(api, input, senderID) {
-    const query = input.trim() || "hi";
-    const response = await getAnswerFromAI(api, query, senderID);
-    return response;
-}
-
-// Bot Configuration and Command Handler
 module.exports = {
-    config: {
-        name: 'ai',
-        author: 'Dev-hack',
-        role: 0,
-        category: 'ai',
-        shortDescription: 'AI to answer any question',
+  config: {
+    name: "ai",
+    version: 1.0,
+    author: "Aesther",
+    longDescription: "AI",
+    category: "ai",
+    guide: {
+      en: "{p} questions",
     },
-    // Triggered when the command is invoked
-    onStart: async function ({ api, event, args }) {
-        await handleCommand(api, event, args);
-    },
-    // Handles incoming chat messages
-    onChat: async function ({ api, event }) {
-        const messageContent = event.body.trim().toLowerCase();
+  },
+  onStart: async function () {},
+  onChat: async function ({ api, event, args, message }) {
+    try {
 
-        // Command is triggered by any message that starts with "ai"
-        if (messageContent.startsWith("ai") && event.senderID !== api.getCurrentUserID()) {
-            const input = messageContent.replace(/^ai\s*/, "").trim();
-            await handleCommand(api, event, [input]);
-        }
+      const prefix = Prefixes.find((p) => event.body && event.body.toLowerCase().startsWith(p));
+      if (!prefix) {
+        return; // Invalid prefix, ignore the command
+      }
+      const prompt = event.body.substring(prefix.length).trim();
+      if (!prompt) {
+      const prompt = event.body.substring(prefix.length).trim();
+api.setMessageReaction("💬", event.messageID, () => {}, true);
+      if (!prompt) {
+        await message.reply("𝐣𝐞  𝐬𝐮𝐢𝐬 𝐝𝐚𝐦𝐢𝐛𝐚 𝐝𝐮 𝐩𝐫𝐨𝐯𝐢𝐧𝐜𝐢𝐚𝐥 𝐩𝐨𝐬𝐞 𝐭𝐚 𝐪𝐮𝐞𝐬𝐭𝐢𝐨𝐧");
+        return;
+      }
+        return;
+      }
+      const senderID = event.senderID;
+      const senderInfo = await api.getUserInfo([senderID]);
+      const senderName = senderInfo[senderID].name;
+      const response = await axios.get(`https://sandipbaruwal.onrender.com/gemini?prompt=${encodeURIComponent(rolePlay + prompt)}`);
+      const answer = `💬 L̑̈P̑̈B̑̈\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n${response.data.answer} \n▬▬▬▬▬▬▬▬▬▬▬▬▬`;
+api.setMessageReaction("✅", event.messageID, () => {}, true);
+
+      //apply const font to each letter in the answer
+      let formattedAnswer = "";
+      for (let letter of answer) {
+        formattedAnswer += letter in fonts.mathsans ? fonts.mathsans[letter] : letter;
+      }
+
+      await message.reply(formattedAnswer);
+
+    } catch (error) {
+      console.error("Error:", error.message);
     }
+  }
 };
