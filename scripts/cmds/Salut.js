@@ -15,6 +15,6 @@ onChat: async function({
 	message,
 	getLang
 }) {
-	if (event.body && event.body.toLowerCase() == "salut") return message.reply("salut.. je suis l'intelligence artificielle de boulsa. n'hésitez pas à me poser des questions 🙂 ");
+	if (event.body && event.body.toLowerCase() == "salut") return message.reply("salut.. je suis l'intelligence artificielle créer par cheik amir. n'hésitez pas à me poser des questions 🙂 ");
 }
 };
